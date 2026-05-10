@@ -132,7 +132,22 @@ export default function JobsPage() {
       return;
     }
 
-    setJobs((data ?? []) as JobRow[]);
+    const rows: JobRow[] = (data ?? []).map((row: any) => {
+      const customer =
+        Array.isArray(row?.customers) ? (row.customers[0] ?? null) : (row?.customers ?? null);
+      const car = Array.isArray(row?.cars) ? (row.cars[0] ?? null) : (row?.cars ?? null);
+
+      return {
+        id: String(row?.id ?? ""),
+        description: row?.description ?? null,
+        status: row?.status as JobStatus,
+        created_at: String(row?.created_at ?? ""),
+        customers: customer,
+        cars: car,
+      };
+    });
+
+    setJobs(rows);
   }
 
   useEffect(() => {
