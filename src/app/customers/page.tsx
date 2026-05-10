@@ -145,7 +145,7 @@ export default function CustomersPage() {
           <UpgradeToProNavLink />
           <button
             onClick={() => setShowNew(true)}
-            className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-zinc-800"
+            className="h-10 rounded-md bg-blue-600 px-5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
           >
             New customer
           </button>
