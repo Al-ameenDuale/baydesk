@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { UpgradeToProNavLink } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
@@ -20,13 +21,15 @@ type JobRow = {
   description: string | null;
   status: JobStatus;
   created_at: string;
-  cars: { make: string | null; model: string | null; year: number | null } | null;
+  // Supabase join returns an array (even for FK joins) in this setup.
+  cars: Array<{ make: string | null; model: string | null; year: number | null }> | null;
 };
 
 function formatCar(car: JobRow["cars"]) {
-  if (!car) return "—";
-  const parts = [car.year ?? null, car.make ?? null, car.model ?? null].filter(
-    (p) => p !== null && String(p).trim().length > 0
+  const first = Array.isArray(car) ? (car[0] ?? null) : null;
+  if (!first) return "—";
+  const parts = [first.year ?? null, first.make ?? null, first.model ?? null].filter(
+    (p) => p !== null && String(p).trim().length > 0,
   );
   return parts.length ? parts.join(" ") : "—";
 }
@@ -86,7 +89,7 @@ export default function CustomerProfilePage() {
         return;
       }
 
-      setJobs((jobsData ?? []) as JobRow[]);
+      setJobs((jobsData ?? []) as unknown as JobRow[]);
     }
 
     if (!checking) void load();
@@ -104,9 +107,9 @@ export default function CustomerProfilePage() {
     <div className="min-h-screen bg-zinc-50">
       <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
         <div className="flex items-center gap-3">
-          <a href="/customers" className="text-sm font-medium text-zinc-700 hover:underline">
+          <Link href="/customers" className="text-sm font-medium text-zinc-700 hover:underline">
             Customers
-          </a>
+          </Link>
           <span className="text-zinc-300">/</span>
           <h1 className="text-lg font-semibold text-zinc-900">
             {customer?.name ?? "Customer"}
