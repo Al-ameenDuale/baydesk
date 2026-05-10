@@ -29,6 +29,7 @@ body {
 input,
 textarea,
 select {
-  color: var(--foreground);
-  background-color: var(--background);
+  /* Keep backgrounds as-authored (usually white); only fix faint typed text. */
+  color: #111827;
+  caret-color: #111827;
 }
