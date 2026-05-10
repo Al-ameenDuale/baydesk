@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { UpgradeToProNavLink, type SubscriptionNavFields } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
+import { hasFreeTrialAccess, subscriptionIsActive } from "@/lib/trial";
 
 type InvoiceStatus = "paid" | "unpaid";
 
@@ -86,7 +87,7 @@ export default function DashboardPage() {
 
       const { data: profile, error: profileErr } = await supabase
         .from("profiles")
-        .select("is_subscriber, subscription_status, trial_ends_at")
+        .select("is_subscriber, subscription_status, created_at")
         .eq("id", session.user.id)
         .single();
 
@@ -100,20 +101,14 @@ export default function DashboardPage() {
 
       setNavSubscription(subscriptionSnapshot);
 
-      if (!profileErr) {
-        const trialEndsAt = profile?.trial_ends_at ? new Date(profile.trial_ends_at) : null;
-        const isTrialing =
-          profile?.subscription_status === "trialing" &&
-          trialEndsAt !== null &&
-          trialEndsAt.getTime() > Date.now();
-
-        const isActive =
-          profile?.is_subscriber === true && profile?.subscription_status === "active";
-
-        if (!isActive && !isTrialing) {
-          window.location.replace("/pricing");
-          return;
-        }
+      const status = profile?.subscription_status ?? null;
+      const createdAt =
+        (profile?.created_at as string | undefined) ?? session.user.created_at ?? null;
+      const allowed =
+        subscriptionIsActive(status) || hasFreeTrialAccess(createdAt, status);
+      if (!allowed) {
+        window.location.replace("/trial-expired");
+        return;
       }
 
       setEmail(session.user.email ?? null);
