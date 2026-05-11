@@ -4,7 +4,7 @@ export default function Home() {
       <header className="border-b border-zinc-200 bg-white">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <div className="text-sm font-semibold tracking-wide text-[#1B2A4A]">
-            GarageOS
+            BayDesk
           </div>
           <nav className="flex items-center gap-3">
             <a
@@ -32,7 +32,7 @@ export default function Home() {
                 The operating system for your repair shop
               </h1>
               <p className="mt-5 text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
-                GarageOS helps independent auto repair shops track jobs, manage customers,
+                BayDesk helps independent auto repair shops track jobs, manage customers,
                 generate invoices, and monitor income — all in one place.
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -168,7 +168,7 @@ export default function Home() {
                 </span>
               </summary>
               <p className="mt-2 text-sm text-zinc-700">
-                Yes. GarageOS works on any device with a browser.
+                Yes. BayDesk works on any device with a browser.
               </p>
             </details>
             <details className="group px-6 py-4">
@@ -222,7 +222,7 @@ export default function Home() {
 
       <footer className="border-t border-zinc-200 bg-white">
         <div className="mx-auto w-full max-w-6xl px-6 py-8 text-sm text-zinc-600">
-          <span className="font-semibold text-[#1B2A4A]">GarageOS</span> ©{" "}
+          <span className="font-semibold text-[#1B2A4A]">BayDesk</span> ©{" "}
           {new Date().getFullYear()}
         </div>
       </footer>

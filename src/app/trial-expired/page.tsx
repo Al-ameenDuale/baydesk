@@ -63,7 +63,7 @@ export default function TrialExpiredPage() {
       <div className="w-full max-w-md rounded-lg border border-zinc-200 bg-white p-8 text-center shadow-sm">
         <h1 className="text-xl font-semibold text-zinc-900">Free trial ended</h1>
         <p className="mt-4 text-sm text-zinc-600">
-          Your free trial has expired. Upgrade to continue using GarageOS.
+          Your free trial has expired. Upgrade to continue using BayDesk.
         </p>
         <Link
           href="/pricing"

@@ -1,4 +1,4 @@
--- GarageOS RLS audit
+-- BayDesk RLS audit
 -- Run this in the Supabase SQL editor to see current RLS status + policies.
 
 -- 1) RLS enabled?

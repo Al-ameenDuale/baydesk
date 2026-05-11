@@ -1,4 +1,4 @@
--- GarageOS RLS baseline policies
+-- BayDesk RLS baseline policies
 -- Assumptions based on app code:
 -- - profiles.id == auth.uid()
 -- - customers.owner_id, cars.owner_id, jobs.owner_id, invoices.owner_id == auth.uid()

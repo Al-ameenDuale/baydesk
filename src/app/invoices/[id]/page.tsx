@@ -54,7 +54,7 @@ export default function InvoicePrintPage() {
   const [updating, setUpdating] = useState(false);
 
   const shopName = useMemo(() => {
-    return profile?.shop_name?.trim() ? profile.shop_name.trim() : "GarageOS";
+    return profile?.shop_name?.trim() ? profile.shop_name.trim() : "BayDesk";
   }, [profile]);
 
   useEffect(() => {

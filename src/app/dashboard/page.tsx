@@ -287,7 +287,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-zinc-50">
       <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
-        <h1 className="text-lg font-semibold text-zinc-900">GarageOS Dashboard</h1>
+        <h1 className="text-lg font-semibold text-zinc-900">BayDesk Dashboard</h1>
         <div className="flex items-center gap-3">
           <a
             href="/jobs"
