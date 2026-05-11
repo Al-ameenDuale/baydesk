@@ -16,24 +16,34 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
 
-    const { data, error: signInError } = await supabase.auth.signInWithPassword(
-      {
-        email,
-        password,
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const json = (await res.json().catch(() => null)) as {
+        session?: { access_token: string; refresh_token: string };
+        user?: { id: string };
+        error?: string;
+      } | null;
+
+      if (!res.ok || !json?.session) {
+        setLoading(false);
+        setError(json?.error ?? "Could not log in. Please try again.");
+        return;
       }
-    );
 
-    setLoading(false);
+      await supabase.auth.setSession({
+        access_token: json.session.access_token,
+        refresh_token: json.session.refresh_token,
+      });
 
-    if (signInError) {
-      setError(signInError.message);
-      return;
-    }
-
-    if (data.session) {
       router.push("/dashboard");
-    } else {
-      setError("Could not start a session. Please try again.");
+    } catch {
+      setLoading(false);
+      setError("Network error. Please try again.");
     }
   }
 
@@ -93,4 +103,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
