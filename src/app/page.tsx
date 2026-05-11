@@ -82,6 +82,95 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Who it's for */}
+        <section className="mx-auto w-full max-w-6xl px-6 pb-16">
+          <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-[#1B2A4A]">
+              Built for independent repair shops
+            </h2>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-700">
+              <li>Solo mechanics and small shops tired of paper and spreadsheets</li>
+              <li>Shop owners who want simple invoicing without expensive software</li>
+              <li>Anyone managing jobs, customers, and income across 1-5 staff</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="mx-auto w-full max-w-6xl px-6 pb-16">
+          <h2 className="text-xl font-semibold text-[#1B2A4A]">Up and running in minutes</h2>
+          <ol className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <li className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#1B2A4A] text-sm font-semibold text-white">
+                  1
+                </span>
+                <h3 className="text-sm font-semibold text-[#1B2A4A]">Step 1</h3>
+              </div>
+              <p className="mt-3 text-sm text-zinc-700">
+                Create your account and start your free 14-day trial
+              </p>
+            </li>
+            <li className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#1B2A4A] text-sm font-semibold text-white">
+                  2
+                </span>
+                <h3 className="text-sm font-semibold text-[#1B2A4A]">Step 2</h3>
+              </div>
+              <p className="mt-3 text-sm text-zinc-700">Add your customers, cars, and jobs</p>
+            </li>
+            <li className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#1B2A4A] text-sm font-semibold text-white">
+                  3
+                </span>
+                <h3 className="text-sm font-semibold text-[#1B2A4A]">Step 3</h3>
+              </div>
+              <p className="mt-3 text-sm text-zinc-700">
+                Generate invoices and track your income
+              </p>
+            </li>
+          </ol>
+        </section>
+
+        {/* FAQ */}
+        <section className="mx-auto w-full max-w-6xl px-6 pb-16">
+          <h2 className="text-xl font-semibold text-[#1B2A4A]">Frequently asked questions</h2>
+          <div className="mt-6 divide-y divide-zinc-200 rounded-lg border border-zinc-200 bg-white shadow-sm">
+            <details className="group px-6 py-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-[#1B2A4A]">
+                Do I need a credit card to start?
+              </summary>
+              <p className="mt-2 text-sm text-zinc-700">
+                No. Your 14-day free trial requires no card details.
+              </p>
+            </details>
+            <details className="group px-6 py-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-[#1B2A4A]">
+                Can I cancel anytime?
+              </summary>
+              <p className="mt-2 text-sm text-zinc-700">Yes. No contracts, no commitments.</p>
+            </details>
+            <details className="group px-6 py-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-[#1B2A4A]">
+                Does it work on mobile?
+              </summary>
+              <p className="mt-2 text-sm text-zinc-700">
+                Yes. GarageOS works on any device with a browser.
+              </p>
+            </details>
+            <details className="group px-6 py-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-[#1B2A4A]">
+                What happens after my trial ends?
+              </summary>
+              <p className="mt-2 text-sm text-zinc-700">
+                You&apos;ll be prompted to upgrade to keep access. Plans start at $49.99/month.
+              </p>
+            </details>
+          </div>
+        </section>
+
         {/* Pricing */}
         <section className="border-t border-zinc-200 bg-white">
           <div className="mx-auto w-full max-w-6xl px-6 py-16">
