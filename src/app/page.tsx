@@ -1,3 +1,5 @@
+import { SiteFooter } from "@/components/SiteFooter";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0f172a]">
@@ -220,12 +222,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-zinc-200 bg-white">
-        <div className="mx-auto w-full max-w-6xl px-6 py-8 text-sm text-zinc-600">
-          <span className="font-semibold text-[#1B2A4A]">BayDesk</span> ©{" "}
-          {new Date().getFullYear()}
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

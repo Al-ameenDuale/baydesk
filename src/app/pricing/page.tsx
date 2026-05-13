@@ -37,7 +37,10 @@ export default function PricingPage() {
         .eq("id", session.user.id)
         .single();
 
-      setIsSubscriber(profile?.is_subscriber === true && profile?.subscription_status === "active");
+      setIsSubscriber(
+        profile?.is_subscriber === true &&
+          profile?.subscription_status === "active",
+      );
       setTrialEndsAt(profile?.trial_ends_at ?? null);
       setChecking(false);
     }
@@ -50,7 +53,9 @@ export default function PricingPage() {
     setError(null);
     setLoading(true);
 
-    const ends = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
+    const ends = new Date(
+      Date.now() + 14 * 24 * 60 * 60 * 1000,
+    ).toISOString();
     const { error: updErr } = await supabase
       .from("profiles")
       .update({
@@ -71,21 +76,55 @@ export default function PricingPage() {
     window.location.replace("/dashboard");
   }
 
-  async function subscribe() {
+  async function getAccessToken(): Promise<string | null> {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session?.access_token) return session.access_token;
+    const { data } = await supabase.auth.refreshSession();
+    return data.session?.access_token ?? null;
+  }
+
+  async function subscribeDodo() {
     if (!userId || !email) return;
     setError(null);
     setLoading(true);
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    let accessToken = session?.access_token;
-
+    const accessToken = await getAccessToken();
     if (!accessToken) {
-      const { data } = await supabase.auth.refreshSession();
-      accessToken = data.session?.access_token;
+      setLoading(false);
+      setError("You must be signed in to subscribe.");
+      return;
     }
 
+    const res = await fetch("/api/dodo/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const json = (await res.json().catch(() => null)) as
+      | { url?: string; error?: string }
+      | null;
+
+    setLoading(false);
+
+    if (!res.ok || !json?.url) {
+      setError(json?.error || "Could not start checkout.");
+      return;
+    }
+
+    window.location.href = json.url;
+  }
+
+  async function subscribeLemonSqueezy() {
+    if (!userId || !email) return;
+    setError(null);
+    setLoading(true);
+
+    const accessToken = await getAccessToken();
     if (!accessToken) {
       setLoading(false);
       setError("You must be signed in to subscribe.");
@@ -135,7 +174,9 @@ export default function PricingPage() {
           <span className="text-zinc-300">/</span>
           <h1 className="text-lg font-semibold text-zinc-900">Pricing</h1>
         </div>
-        <div className="text-sm text-zinc-600">{email ? `Signed in as ${email}` : ""}</div>
+        <div className="text-sm text-zinc-600">
+          {email ? `Signed in as ${email}` : ""}
+        </div>
       </header>
 
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 py-10">
@@ -147,28 +188,37 @@ export default function PricingPage() {
 
           <div className="mt-6 flex items-baseline justify-between">
             <div>
-              <div className="text-3xl font-semibold text-zinc-900">$49.99</div>
+              <div className="text-3xl font-semibold text-zinc-900">
+                $49.99
+              </div>
               <div className="text-sm text-zinc-600">per month</div>
             </div>
             <div className="text-sm text-zinc-600">14‑day trial</div>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
             <button
               onClick={() => void startFreeTrial()}
               disabled={loading || trialActive || isSubscriber}
               className="h-10 w-full rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
             >
               {isSubscriber
-                ? "You’re subscribed"
+                ? "You\u2019re subscribed"
                 : trialActive
                   ? "Trial active"
                   : loading
                     ? "Starting..."
-                    : "Start 14‑day free trial"}
+                    : "Start 14\u2011day free trial"}
             </button>
             <button
-              onClick={() => void subscribe()}
+              onClick={() => void subscribeDodo()}
+              disabled={loading || isSubscriber}
+              className="h-10 w-full rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
+            >
+              {loading ? "Redirecting..." : "Subscribe with Dodo"}
+            </button>
+            <button
+              onClick={() => void subscribeLemonSqueezy()}
               disabled={loading || isSubscriber}
               className="h-10 w-full rounded-md border border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-900 hover:bg-zinc-100 disabled:opacity-60"
             >
@@ -191,13 +241,16 @@ export default function PricingPage() {
 
         <section className="rounded-lg border border-zinc-200 bg-white p-6 text-sm text-zinc-700 shadow-sm">
           <h3 className="text-sm font-semibold text-zinc-900">Notes</h3>
-          <ul className="mt-2 list-disc pl-5 space-y-1">
+          <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>Trial is enforced in-app (no card required).</li>
-            <li>Subscription activation happens via Lemon Squeezy webhook.</li>
+            <li>
+              Subscription activation happens via webhook (Dodo Payments or
+              Lemon Squeezy).
+            </li>
+            <li>Both payment providers are active — choose either option above.</li>
           </ul>
         </section>
       </main>
     </div>
   );
 }
-
