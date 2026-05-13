@@ -120,40 +120,6 @@ export default function PricingPage() {
     window.location.href = json.url;
   }
 
-  async function subscribeLemonSqueezy() {
-    if (!userId || !email) return;
-    setError(null);
-    setLoading(true);
-
-    const accessToken = await getAccessToken();
-    if (!accessToken) {
-      setLoading(false);
-      setError("You must be signed in to subscribe.");
-      return;
-    }
-
-    const res = await fetch("/api/lemonsqueezy/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const json = (await res.json().catch(() => null)) as
-      | { url?: string; error?: string }
-      | null;
-
-    setLoading(false);
-
-    if (!res.ok || !json?.url) {
-      setError(json?.error || "Could not start checkout.");
-      return;
-    }
-
-    window.location.href = json.url;
-  }
-
   if (checking) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-zinc-50">
@@ -197,7 +163,7 @@ export default function PricingPage() {
             <div className="text-sm text-zinc-600">14‑day trial</div>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <button
               onClick={() => void startFreeTrial()}
               disabled={loading || trialActive || isSubscriber}
@@ -218,14 +184,12 @@ export default function PricingPage() {
             >
               {loading ? "Redirecting..." : "Subscribe with Dodo"}
             </button>
-            <button
-              onClick={() => void subscribeLemonSqueezy()}
-              disabled={loading || isSubscriber}
-              className="h-10 w-full rounded-md border border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-900 hover:bg-zinc-100 disabled:opacity-60"
-            >
-              {loading ? "Redirecting..." : "Subscribe with Lemon Squeezy"}
-            </button>
           </div>
+
+          {/* Paddle checkout integration coming soon. */}
+          <p className="mt-4 rounded-md border border-dashed border-zinc-300 bg-zinc-50 px-4 py-3 text-center text-sm text-zinc-600">
+            Paddle checkout integration coming soon.
+          </p>
 
           {trialEndsAt && !isSubscriber && (
             <p className="mt-3 text-xs text-zinc-500">
@@ -245,10 +209,10 @@ export default function PricingPage() {
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>Trial is enforced in-app (no card required).</li>
             <li>
-              Subscription activation happens via webhook (Dodo Payments or
-              Lemon Squeezy).
+              Paid subscription activation happens via Dodo Payments webhook after
+              checkout.
             </li>
-            <li>Both payment providers are active — choose either option above.</li>
+            <li>Paddle checkout will be available here when integration is complete.</li>
           </ul>
         </section>
       </main>
