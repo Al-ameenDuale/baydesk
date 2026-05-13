@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { SiteFooter } from "@/components/SiteFooter";
 import { supabase } from "@/lib/supabase/client";
 
 export default function PricingPage() {
@@ -251,6 +252,8 @@ export default function PricingPage() {
           </ul>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }
