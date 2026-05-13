@@ -5,7 +5,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-zinc-200 bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-8 text-center">
+      <div className="mx-auto w-full max-w-6xl px-4 py-8 text-center sm:px-6 lg:px-8">
         <nav
           className="flex flex-wrap items-center justify-center gap-x-2 text-sm text-zinc-600"
           aria-label="Legal"

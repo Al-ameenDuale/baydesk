@@ -149,29 +149,31 @@ export default function InvoicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
-        <div className="flex items-center gap-3">
-          <a href="/dashboard" className="text-sm font-medium text-zinc-700 hover:underline">
-            Dashboard
-          </a>
-          <span className="text-zinc-300">/</span>
-          <h1 className="text-lg font-semibold text-zinc-900">Invoices</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <UpgradeToProNavLink />
-          <a
-            href="/jobs"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-          >
-            Generate from jobs
-          </a>
+    <div className="min-h-screen min-w-0 bg-zinc-50">
+      <header className="border-b border-zinc-200 bg-white px-4 py-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+            <a href="/dashboard" className="text-sm font-medium text-zinc-700 hover:underline">
+              Dashboard
+            </a>
+            <span className="text-zinc-300">/</span>
+            <h1 className="text-lg font-semibold text-zinc-900">Invoices</h1>
+          </div>
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <UpgradeToProNavLink />
+            <a
+              href="/jobs"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
+            >
+              Generate from jobs
+            </a>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 md:py-8">
         <section className="rounded-lg border border-zinc-200 bg-white shadow-sm">
-          <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+          <div className="flex flex-col gap-2 border-b border-zinc-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <h2 className="text-base font-semibold text-zinc-900">All invoices</h2>
             <button
               onClick={() => void load()}
@@ -183,14 +185,14 @@ export default function InvoicesPage() {
           </div>
 
           {error && (
-            <div className="px-6 py-4">
+            <div className="px-4 py-4 sm:px-6">
               <p className="text-sm text-red-600" role="alert">
                 {error}
               </p>
             </div>
           )}
 
-          <div className="overflow-x-auto">
+          <div className="max-w-full overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200">
               <thead className="bg-zinc-50">
                 <tr>

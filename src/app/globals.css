@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #171717;
 }
 
@@ -12,14 +12,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Keep a single light surface for the app so system dark mode does not paint a full black page behind light UIs. */
+html {
+  overflow-x: clip;
+  text-size-adjust: 100%;
 }
 
 body {
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;

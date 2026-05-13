@@ -53,7 +53,7 @@ export function UpgradeToProNavLink({ profile }: { profile?: SubscriptionNavFiel
   return (
     <Link
       href="/pricing"
-      className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-zinc-800"
+      className="inline-flex min-h-11 items-center justify-center rounded-md bg-zinc-900 px-4 text-xs font-medium text-white hover:bg-zinc-800"
     >
       Upgrade to Pro
     </Link>

@@ -1,10 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BayDesk",
   description: "The operating system for your repair shop",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -15,10 +20,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className="h-full min-w-0 overflow-x-clip antialiased"
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body
+        className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-zinc-50 text-zinc-900"
+        suppressHydrationWarning
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

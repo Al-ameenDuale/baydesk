@@ -129,33 +129,35 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
-        <div className="flex items-center gap-3">
-          <a
-            href="/dashboard"
-            className="text-sm font-medium text-zinc-700 hover:underline"
-          >
-            Dashboard
-          </a>
-          <span className="text-zinc-300">/</span>
-          <h1 className="text-lg font-semibold text-zinc-900">Pricing</h1>
-        </div>
-        <div className="text-sm text-zinc-600">
-          {email ? `Signed in as ${email}` : ""}
+    <div className="flex min-h-screen min-w-0 flex-col bg-zinc-50">
+      <header className="border-b border-zinc-200 bg-white px-4 py-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+            <a
+              href="/dashboard"
+              className="text-sm font-medium text-zinc-700 hover:underline"
+            >
+              Dashboard
+            </a>
+            <span className="text-zinc-300">/</span>
+            <h1 className="text-lg font-semibold text-zinc-900">Pricing</h1>
+          </div>
+          <div className="min-w-0 truncate text-sm text-zinc-600 sm:max-w-[50%] sm:text-right">
+            {email ? `Signed in as ${email}` : ""}
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 py-10">
-        <section className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10">
+        <section className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm sm:p-6">
           <h2 className="text-xl font-semibold text-zinc-900">Entry tier</h2>
           <p className="mt-1 text-sm text-zinc-600">
             $49.99/month. Includes a 14‑day free trial with no card required.
           </p>
 
-          <div className="mt-6 flex items-baseline justify-between">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
             <div>
-              <div className="text-3xl font-semibold text-zinc-900">
+              <div className="text-2xl font-semibold text-zinc-900 sm:text-3xl">
                 $49.99
               </div>
               <div className="text-sm text-zinc-600">per month</div>
@@ -167,7 +169,7 @@ export default function PricingPage() {
             <button
               onClick={() => void startFreeTrial()}
               disabled={loading || trialActive || isSubscriber}
-              className="h-10 w-full rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
+              className="min-h-11 w-full rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
             >
               {isSubscriber
                 ? "You\u2019re subscribed"
@@ -180,7 +182,7 @@ export default function PricingPage() {
             <button
               onClick={() => void subscribeDodo()}
               disabled={loading || isSubscriber}
-              className="h-10 w-full rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
+              className="min-h-11 w-full rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
             >
               {loading ? "Redirecting..." : "Subscribe with Dodo"}
             </button>
@@ -204,7 +206,7 @@ export default function PricingPage() {
           )}
         </section>
 
-        <section className="rounded-lg border border-zinc-200 bg-white p-6 text-sm text-zinc-700 shadow-sm">
+        <section className="rounded-lg border border-zinc-200 bg-white p-4 text-sm text-zinc-700 shadow-sm sm:p-6">
           <h3 className="text-sm font-semibold text-zinc-900">Notes</h3>
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>Trial is enforced in-app (no card required).</li>

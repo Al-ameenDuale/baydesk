@@ -285,41 +285,45 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
-        <h1 className="text-lg font-semibold text-zinc-900">BayDesk Dashboard</h1>
-        <div className="flex items-center gap-3">
-          <a
-            href="/jobs"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-          >
-            Jobs
-          </a>
-          <a
-            href="/customers"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-          >
-            Customers
-          </a>
-          <a
-            href="/invoices"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-          >
-            Invoices
-          </a>
-          <UpgradeToProNavLink profile={navSubscription} />
-          {email && (
-            <span className="text-sm text-zinc-600">Signed in as {email}</span>
-          )}
-          <button
-            onClick={handleLogout}
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-          >
-            Log out
-          </button>
+    <div className="min-h-screen min-w-0 bg-zinc-50">
+      <header className="border-b border-zinc-200 bg-white px-4 py-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <h1 className="min-w-0 text-lg font-semibold text-zinc-900">BayDesk Dashboard</h1>
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <a
+              href="/jobs"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
+            >
+              Jobs
+            </a>
+            <a
+              href="/customers"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
+            >
+              Customers
+            </a>
+            <a
+              href="/invoices"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
+            >
+              Invoices
+            </a>
+            <UpgradeToProNavLink profile={navSubscription} />
+            {email && (
+              <span className="max-w-full truncate text-sm text-zinc-600 sm:max-w-[14rem]">
+                Signed in as {email}
+              </span>
+            )}
+            <button
+              onClick={handleLogout}
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
+            >
+              Log out
+            </button>
+          </div>
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 md:py-8">
         {summaryError && (
           <section className="rounded-lg border border-red-200 bg-white p-4 text-sm text-red-700">
             {summaryError}
@@ -354,7 +358,7 @@ export default function DashboardPage() {
         </section>
 
         <section className="rounded-lg border border-zinc-200 bg-white shadow-sm">
-          <div className="flex flex-col gap-3 border-b border-zinc-200 px-6 py-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-3 border-b border-zinc-200 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-base font-semibold text-zinc-900">Revenue</h2>
               <p className="mt-1 text-sm text-zinc-600">
@@ -371,7 +375,7 @@ export default function DashboardPage() {
                   type="date"
                   value={rangeStart}
                   onChange={(e) => setRangeStart(e.target.value)}
-                  className="h-9 rounded-md border border-zinc-300 px-3 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                  className="h-11 w-full min-w-0 rounded-md border border-zinc-300 px-3 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                 />
               </div>
               <div>
@@ -382,27 +386,27 @@ export default function DashboardPage() {
                   type="date"
                   value={rangeEnd}
                   onChange={(e) => setRangeEnd(e.target.value)}
-                  className="h-9 rounded-md border border-zinc-300 px-3 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                  className="h-11 w-full min-w-0 rounded-md border border-zinc-300 px-3 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                 />
               </div>
               <button
                 onClick={() => void loadRevenueInRange()}
                 disabled={loadingRevenue}
-                className="h-9 rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
+                className="h-11 min-h-11 rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
               >
                 {loadingRevenue ? "Loading..." : "Apply"}
               </button>
               <button
                 onClick={() => void loadSummary()}
                 disabled={loadingSummary}
-                className="h-9 rounded-md border border-zinc-300 px-4 text-sm font-medium text-zinc-900 hover:bg-zinc-100 disabled:opacity-60"
+                className="h-11 min-h-11 rounded-md border border-zinc-300 px-4 text-sm font-medium text-zinc-900 hover:bg-zinc-100 disabled:opacity-60"
               >
                 {loadingSummary ? "Refreshing..." : "Refresh totals"}
               </button>
             </div>
           </div>
 
-          <div className="px-6 py-4">
+          <div className="px-4 py-4 sm:px-6">
             {revenueError && (
               <p className="mb-3 text-sm text-red-600" role="alert">
                 {revenueError}
@@ -418,17 +422,17 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="max-w-full overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200">
               <thead className="bg-zinc-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-zinc-600">
+                  <th className="px-3 py-3 text-left text-xs font-semibold text-zinc-600 sm:px-6">
                     Customer
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-zinc-600">
+                  <th className="px-3 py-3 text-left text-xs font-semibold text-zinc-600 sm:px-6">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-zinc-600">
+                  <th className="px-3 py-3 text-left text-xs font-semibold text-zinc-600 sm:px-6">
                     Date
                   </th>
                 </tr>
@@ -436,23 +440,23 @@ export default function DashboardPage() {
               <tbody className="divide-y divide-zinc-200 bg-white">
                 {revenueRows.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-6 py-8 text-center text-sm text-zinc-600">
+                    <td colSpan={3} className="px-3 py-8 text-center text-sm text-zinc-600 sm:px-6">
                       No paid invoices in this date range.
                     </td>
                   </tr>
                 ) : (
                   revenueRows.map((row) => (
                     <tr key={row.invoiceId} className="hover:bg-zinc-50">
-                      <td className="px-6 py-4 text-sm font-medium text-zinc-900">
+                      <td className="px-3 py-4 text-sm font-medium text-zinc-900 sm:px-6">
                         {row.customerName}
                         <div className="mt-1 text-xs text-zinc-500">
                           {row.jobDescription}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-zinc-700">
+                      <td className="px-3 py-4 text-sm text-zinc-700 sm:px-6">
                         {formatMoney(row.amountCents)}
                       </td>
-                      <td className="px-6 py-4 text-sm text-zinc-600">
+                      <td className="px-3 py-4 text-sm text-zinc-600 sm:px-6">
                         {new Date(row.createdAt).toLocaleDateString()}
                       </td>
                     </tr>

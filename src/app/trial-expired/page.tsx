@@ -52,22 +52,22 @@ export default function TrialExpiredPage() {
 
   if (checking) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50">
+      <div className="flex min-h-screen min-w-0 items-center justify-center bg-zinc-50">
         <p className="text-sm text-zinc-600">Loading…</p>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4">
-      <div className="w-full max-w-md rounded-lg border border-zinc-200 bg-white p-8 text-center shadow-sm">
+    <div className="flex min-h-screen min-w-0 items-center justify-center bg-zinc-50 px-4">
+      <div className="w-full max-w-md min-w-0 rounded-lg border border-zinc-200 bg-white p-6 text-center shadow-sm sm:p-8">
         <h1 className="text-xl font-semibold text-zinc-900">Free trial ended</h1>
         <p className="mt-4 text-sm text-zinc-600">
           Your free trial has expired. Upgrade to continue using BayDesk.
         </p>
         <Link
           href="/pricing"
-          className="mt-6 inline-flex h-10 items-center justify-center rounded-md bg-zinc-900 px-6 text-sm font-medium text-white hover:bg-zinc-800"
+          className="mx-auto mt-6 inline-flex min-h-12 w-full max-w-xs items-center justify-center rounded-md bg-zinc-900 px-6 text-sm font-medium text-white hover:bg-zinc-800 sm:w-auto"
         >
           Upgrade
         </Link>

@@ -31,8 +31,8 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50">
-      <div className="w-full max-w-md rounded-lg border border-zinc-200 bg-white p-8 shadow-sm">
+    <div className="flex min-h-screen min-w-0 items-center justify-center bg-zinc-50 px-4 py-8">
+      <div className="w-full max-w-md min-w-0 rounded-lg border border-zinc-200 bg-white p-6 shadow-sm sm:p-8">
         <h1 className="mb-6 text-center text-2xl font-semibold text-zinc-900">
           BayDesk – Sign up
         </h1>
@@ -63,7 +63,7 @@ export default function SignupPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                  className="w-full min-h-11 rounded-md border border-zinc-300 px-3 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                   placeholder="you@example.com"
                 />
               </div>
@@ -77,7 +77,7 @@ export default function SignupPage() {
                   minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                  className="w-full min-h-11 rounded-md border border-zinc-300 px-3 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                   placeholder="••••••••"
                 />
               </div>
@@ -89,7 +89,7 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex w-full items-center justify-center rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
+                className="flex min-h-11 w-full items-center justify-center rounded-md bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
               >
                 {loading ? "Creating account..." : "Sign up"}
               </button>

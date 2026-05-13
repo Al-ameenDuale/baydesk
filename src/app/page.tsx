@@ -2,22 +2,22 @@ import { SiteFooter } from "@/components/SiteFooter";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#0f172a]">
+    <div className="min-h-screen min-w-0 bg-white text-[#0f172a]">
       <header className="border-b border-zinc-200 bg-white">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
           <div className="text-sm font-semibold tracking-wide text-[#1B2A4A]">
             BayDesk
           </div>
-          <nav className="flex items-center gap-3">
+          <nav className="flex flex-wrap items-center gap-2 sm:gap-3">
             <a
               href="/login"
-              className="text-sm font-medium text-zinc-700 hover:text-[#1B2A4A] hover:underline"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-zinc-700 hover:text-[#1B2A4A] hover:underline"
             >
               Log in
             </a>
             <a
               href="/signup"
-              className="inline-flex h-9 items-center justify-center rounded-md bg-[#1B2A4A] px-4 text-sm font-semibold text-white hover:bg-[#15213a]"
+              className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#1B2A4A] px-4 text-sm font-semibold text-white hover:bg-[#15213a]"
             >
               Start free trial
             </a>
@@ -27,10 +27,10 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="bg-[#1B2A4A]">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-24">
+        <section className="min-w-0 bg-[#1B2A4A]">
+          <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <div className="max-w-3xl">
-              <h1 className="text-balance text-4xl font-semibold leading-tight text-white sm:text-5xl">
+              <h1 className="text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
                 The operating system for your repair shop
               </h1>
               <p className="mt-5 text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
@@ -40,13 +40,13 @@ export default function Home() {
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
                   href="/signup"
-                  className="inline-flex h-12 items-center justify-center rounded-md bg-white px-7 text-sm font-semibold text-[#1B2A4A] shadow-sm hover:bg-zinc-100"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-md bg-white px-6 text-sm font-semibold text-[#1B2A4A] shadow-sm hover:bg-zinc-100 sm:w-auto sm:px-7"
                 >
                   Start free trial
                 </a>
                 <a
                   href="/pricing"
-                  className="inline-flex h-12 items-center justify-center rounded-md border border-white/30 bg-transparent px-7 text-sm font-semibold text-white hover:bg-white/10"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-md border border-white/30 bg-transparent px-6 text-sm font-semibold text-white hover:bg-white/10 sm:w-auto sm:px-7"
                 >
                   View pricing
                 </a>
@@ -56,7 +56,7 @@ export default function Home() {
         </section>
 
         {/* Features */}
-        <section className="mx-auto w-full max-w-6xl px-6 py-20">
+        <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <h2 className="text-xl font-semibold text-[#1B2A4A]">Features</h2>
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
@@ -87,8 +87,8 @@ export default function Home() {
         </section>
 
         {/* Who it's for */}
-        <section className="mx-auto w-full max-w-6xl px-6 pb-20">
-          <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+        <section className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
+          <div className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm sm:p-6">
             <h2 className="text-xl font-semibold text-[#1B2A4A]">
               Built for independent repair shops
             </h2>
@@ -101,7 +101,7 @@ export default function Home() {
         </section>
 
         {/* How it works */}
-        <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+        <section className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
           <h2 className="text-xl font-semibold text-[#1B2A4A]">Up and running in minutes</h2>
           <ol className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
             <li className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
@@ -139,13 +139,13 @@ export default function Home() {
         </section>
 
         {/* FAQ */}
-        <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+        <section className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
           <h2 className="text-xl font-semibold text-[#1B2A4A]">Frequently asked questions</h2>
           <div className="mt-6 divide-y divide-zinc-200 rounded-lg border border-zinc-200 bg-white shadow-sm">
-            <details className="group px-6 py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-[#1B2A4A]">
-                <span>Do I need a credit card to start?</span>
-                <span className="text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
+            <details className="group px-4 py-4 sm:px-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-[#1B2A4A]">
+                <span className="min-w-0 text-pretty">Do I need a credit card to start?</span>
+                <span className="shrink-0 text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
                   ▾
                 </span>
               </summary>
@@ -153,19 +153,19 @@ export default function Home() {
                 No. Your 14-day free trial requires no card details.
               </p>
             </details>
-            <details className="group px-6 py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-[#1B2A4A]">
-                <span>Can I cancel anytime?</span>
-                <span className="text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
+            <details className="group px-4 py-4 sm:px-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-[#1B2A4A]">
+                <span className="min-w-0 text-pretty">Can I cancel anytime?</span>
+                <span className="shrink-0 text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
                   ▾
                 </span>
               </summary>
               <p className="mt-2 text-sm text-zinc-700">Yes. No contracts, no commitments.</p>
             </details>
-            <details className="group px-6 py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-[#1B2A4A]">
-                <span>Does it work on mobile?</span>
-                <span className="text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
+            <details className="group px-4 py-4 sm:px-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-[#1B2A4A]">
+                <span className="min-w-0 text-pretty">Does it work on mobile?</span>
+                <span className="shrink-0 text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
                   ▾
                 </span>
               </summary>
@@ -173,10 +173,10 @@ export default function Home() {
                 Yes. BayDesk works on any device with a browser.
               </p>
             </details>
-            <details className="group px-6 py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-[#1B2A4A]">
-                <span>What happens after my trial ends?</span>
-                <span className="text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
+            <details className="group px-4 py-4 sm:px-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-[#1B2A4A]">
+                <span className="min-w-0 text-pretty">What happens after my trial ends?</span>
+                <span className="shrink-0 text-[#1B2A4A]/60 transition-transform group-open:rotate-180">
                   ▾
                 </span>
               </summary>
@@ -189,19 +189,19 @@ export default function Home() {
 
         {/* Pricing */}
         <section className="border-t border-zinc-200 bg-white">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20">
+          <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
             <h2 className="text-xl font-semibold text-[#1B2A4A]">Pricing</h2>
             <div className="mt-8 flex justify-center">
-              <div className="w-full max-w-xl rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
-                <div className="flex items-start justify-between gap-6">
+              <div className="w-full max-w-xl rounded-lg border border-zinc-200 bg-white p-5 shadow-sm sm:p-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                   <div>
                     <h3 className="text-base font-semibold text-[#1B2A4A]">Pro</h3>
                     <p className="mt-1 text-sm text-zinc-700">
                       Everything you need to run a small shop.
                     </p>
                   </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-semibold text-[#1B2A4A]">$49.99</div>
+                  <div className="min-w-0 sm:text-right">
+                    <div className="text-2xl font-semibold text-[#1B2A4A] sm:text-3xl">$49.99</div>
                     <div className="text-sm text-zinc-600">per month</div>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function Home() {
 
                 <a
                   href="/signup"
-                  className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-md border border-[#1B2A4A] bg-white px-6 text-sm font-semibold text-[#1B2A4A] hover:bg-zinc-50"
+                  className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-md border border-[#1B2A4A] bg-white px-6 text-sm font-semibold text-[#1B2A4A] hover:bg-zinc-50"
                 >
                   Start free trial
                 </a>

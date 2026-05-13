@@ -104,29 +104,31 @@ export default function CustomerProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
-        <div className="flex items-center gap-3">
-          <Link href="/customers" className="text-sm font-medium text-zinc-700 hover:underline">
-            Customers
-          </Link>
-          <span className="text-zinc-300">/</span>
-          <h1 className="text-lg font-semibold text-zinc-900">
-            {customer?.name ?? "Customer"}
-          </h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <UpgradeToProNavLink />
-          <a
-            href="/jobs"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-          >
-            View jobs
-          </a>
+    <div className="min-h-screen min-w-0 bg-zinc-50">
+      <header className="border-b border-zinc-200 bg-white px-4 py-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+            <Link href="/customers" className="text-sm font-medium text-zinc-700 hover:underline">
+              Customers
+            </Link>
+            <span className="text-zinc-300">/</span>
+            <h1 className="min-w-0 truncate text-lg font-semibold text-zinc-900">
+              {customer?.name ?? "Customer"}
+            </h1>
+          </div>
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <UpgradeToProNavLink />
+            <a
+              href="/jobs"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
+            >
+              View jobs
+            </a>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 md:py-8">
         {error && (
           <section className="rounded-lg border border-red-200 bg-white p-4 text-sm text-red-700">
             {error}
@@ -157,7 +159,7 @@ export default function CustomerProfilePage() {
           <div className="border-b border-zinc-200 px-6 py-4">
             <h2 className="text-base font-semibold text-zinc-900">Jobs</h2>
           </div>
-          <div className="overflow-x-auto">
+          <div className="max-w-full overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200">
               <thead className="bg-zinc-50">
                 <tr>

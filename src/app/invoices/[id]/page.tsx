@@ -158,32 +158,32 @@ export default function InvoicePrintPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-100 p-6">
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="mb-4 flex items-center justify-between print:hidden">
-          <div className="flex items-center gap-3">
+    <div className="min-h-screen min-w-0 bg-zinc-100 px-4 py-6 sm:px-6">
+      <div className="mx-auto w-full max-w-3xl min-w-0">
+        <div className="mb-4 flex flex-col gap-3 print:hidden sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
             <a
               href="/invoices"
-              className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-800 hover:bg-zinc-50"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 bg-white px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-50"
             >
               Back to invoices
             </a>
             <button
               onClick={() => window.print()}
-              className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-zinc-800"
+              className="inline-flex min-h-11 items-center justify-center rounded-md bg-zinc-900 px-3 text-xs font-medium text-white hover:bg-zinc-800"
             >
               Print
             </button>
             <UpgradeToProNavLink />
           </div>
           {invoice && (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs text-zinc-600">Status</span>
               <select
                 value={invoice.status}
                 onChange={(e) => void setStatus(e.target.value as InvoiceStatus)}
                 disabled={updating}
-                className="rounded-md border border-zinc-300 bg-white px-2 py-1 text-sm text-zinc-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 disabled:opacity-60"
+                className="min-h-11 rounded-md border border-zinc-300 bg-white px-2 text-sm text-zinc-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 disabled:opacity-60"
               >
                 <option value="unpaid">Unpaid</option>
                 <option value="paid">Paid</option>
@@ -192,22 +192,22 @@ export default function InvoicePrintPage() {
           )}
         </div>
 
-        <div className="rounded-lg border border-zinc-200 bg-white p-8 shadow-sm print:border-0 print:shadow-none">
+        <div className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm sm:p-8 print:border-0 print:shadow-none">
           {error && (
             <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700 print:hidden">
               {error}
             </div>
           )}
 
-          <div className="flex items-start justify-between gap-6">
-            <div>
-              <h1 className="text-2xl font-semibold text-zinc-900">Invoice</h1>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+            <div className="min-w-0">
+              <h1 className="text-xl font-semibold text-zinc-900 sm:text-2xl">Invoice</h1>
               <p className="mt-1 text-sm text-zinc-600">{shopName}</p>
             </div>
             {invoice && (
-              <div className="text-right">
+              <div className="min-w-0 sm:text-right">
                 <p className="text-sm text-zinc-600">Invoice ID</p>
-                <p className="font-mono text-xs text-zinc-900">{invoice.id}</p>
+                <p className="break-all font-mono text-xs text-zinc-900">{invoice.id}</p>
                 <p className="mt-2 text-sm text-zinc-600">Created</p>
                 <p className="text-sm text-zinc-900">
                   {new Date(invoice.created_at).toLocaleString()}

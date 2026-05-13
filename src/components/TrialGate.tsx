@@ -127,7 +127,7 @@ export function TrialGate({ children }: { children: React.ReactNode }) {
   return (
     <>
       {showBanner && (
-        <div className="sticky top-0 z-50 border-b border-amber-200 bg-amber-50 px-4 py-3 text-center text-sm text-amber-950">
+        <div className="sticky top-0 z-50 border-b border-amber-200 bg-amber-50 px-3 py-3 text-center text-sm text-pretty text-amber-950 sm:px-4">
           You&apos;re on a free trial — {bannerDaysLeft}{" "}
           {bannerDaysLeft === 1 ? "day" : "days"} remaining. Upgrade to keep access.{" "}
           <Link href="/pricing" className="font-semibold underline hover:no-underline">

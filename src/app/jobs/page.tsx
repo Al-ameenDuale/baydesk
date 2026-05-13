@@ -300,30 +300,32 @@ export default function JobsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-4">
-        <div className="flex items-center gap-3">
-          <a href="/dashboard" className="text-sm font-medium text-zinc-700 hover:underline">
-            Dashboard
-          </a>
-          <span className="text-zinc-300">/</span>
-          <h1 className="text-lg font-semibold text-zinc-900">Jobs</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <UpgradeToProNavLink />
-          <button
-            onClick={() => setShowNewJob(true)}
-            className="h-10 rounded-md bg-blue-600 px-5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-          >
-            New job
-          </button>
+    <div className="min-h-screen min-w-0 bg-zinc-50">
+      <header className="border-b border-zinc-200 bg-white px-4 py-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+            <a href="/dashboard" className="text-sm font-medium text-zinc-700 hover:underline">
+              Dashboard
+            </a>
+            <span className="text-zinc-300">/</span>
+            <h1 className="text-lg font-semibold text-zinc-900">Jobs</h1>
+          </div>
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <UpgradeToProNavLink />
+            <button
+              onClick={() => setShowNewJob(true)}
+              className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            >
+              New job
+            </button>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 md:py-8">
         {showInvoiceForJobId && (
-          <section className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
-            <div className="mb-4 flex items-center justify-between">
+          <section className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm sm:p-6">
+            <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-base font-semibold text-zinc-900">
                 Generate invoice
               </h2>
@@ -391,8 +393,8 @@ export default function JobsPage() {
         )}
 
         {showNewJob && (
-          <section className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
-            <div className="mb-4 flex items-center justify-between">
+          <section className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm sm:p-6">
+            <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-base font-semibold text-zinc-900">Create job</h2>
               <button
                 onClick={() => {
@@ -528,7 +530,7 @@ export default function JobsPage() {
         )}
 
         <section className="rounded-lg border border-zinc-200 bg-white shadow-sm">
-          <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+          <div className="flex flex-col gap-2 border-b border-zinc-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <h2 className="text-base font-semibold text-zinc-900">All jobs</h2>
             <button
               onClick={() => void loadJobs()}
@@ -540,14 +542,14 @@ export default function JobsPage() {
           </div>
 
           {jobsError && (
-            <div className="px-6 py-4">
+            <div className="px-4 py-4 sm:px-6">
               <p className="text-sm text-red-600" role="alert">
                 {jobsError}
               </p>
             </div>
           )}
 
-          <div className="overflow-x-auto">
+          <div className="max-w-full overflow-x-auto">
             <table className="min-w-full divide-y divide-zinc-200">
               <thead className="bg-zinc-50">
                 <tr>
