@@ -1,33 +1,43 @@
 import Link from "next/link";
 
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="border-t border-zinc-200 bg-white">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-zinc-600">
-          <span className="font-semibold text-[#1B2A4A]">BayDesk</span> ©{" "}
-          {new Date().getFullYear()}
-        </p>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+      <div className="mx-auto w-full max-w-6xl px-6 py-8 text-center">
+        <nav
+          className="flex flex-wrap items-center justify-center gap-x-2 text-sm text-zinc-600"
+          aria-label="Legal"
+        >
           <Link
             href="/terms"
-            className="text-zinc-600 underline-offset-4 hover:text-[#1B2A4A] hover:underline"
+            className="hover:text-[#1B2A4A] hover:underline"
           >
             Terms of Service
           </Link>
+          <span className="text-zinc-300 select-none" aria-hidden>
+            |
+          </span>
           <Link
             href="/privacy"
-            className="text-zinc-600 underline-offset-4 hover:text-[#1B2A4A] hover:underline"
+            className="hover:text-[#1B2A4A] hover:underline"
           >
             Privacy Policy
           </Link>
+          <span className="text-zinc-300 select-none" aria-hidden>
+            |
+          </span>
           <Link
             href="/refund"
-            className="text-zinc-600 underline-offset-4 hover:text-[#1B2A4A] hover:underline"
+            className="hover:text-[#1B2A4A] hover:underline"
           >
-            Refunds &amp; Cancellation
+            Refund Policy
           </Link>
         </nav>
+        <p className="mt-3 text-sm text-zinc-500">
+          © {year} BayDesk
+        </p>
       </div>
     </footer>
   );
