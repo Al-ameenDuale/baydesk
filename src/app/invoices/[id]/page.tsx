@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { UpgradeToProNavLink } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
 
 type InvoiceStatus = "paid" | "unpaid";
@@ -174,7 +173,6 @@ export default function InvoicePrintPage() {
             >
               Print
             </button>
-            <UpgradeToProNavLink />
           </div>
           {invoice && (
             <div className="flex flex-wrap items-center gap-2">

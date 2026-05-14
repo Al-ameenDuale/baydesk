@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { UpgradeToProNavLink } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
 
 type JobStatus = "pending" | "in_progress" | "done";
@@ -117,7 +116,6 @@ export default function CustomerProfilePage() {
             </h1>
           </div>
           <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <UpgradeToProNavLink />
             <a
               href="/jobs"
               className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"

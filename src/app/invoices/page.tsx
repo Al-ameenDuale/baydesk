@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { UpgradeToProNavLink } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
 
 type InvoiceStatus = "paid" | "unpaid";
@@ -160,7 +159,6 @@ export default function InvoicesPage() {
             <h1 className="text-lg font-semibold text-zinc-900">Invoices</h1>
           </div>
           <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <UpgradeToProNavLink />
             <a
               href="/jobs"
               className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"

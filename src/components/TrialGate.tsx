@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { subscriptionIsActive, trialDaysRemaining, trialHasExpired } from "@/lib/trial";
 import { supabase } from "@/lib/supabase/client";
+import { AppChrome } from "@/components/AppChrome";
 
 const PUBLIC_PATHS = new Set([
   "/",
@@ -135,7 +136,7 @@ export function TrialGate({ children }: { children: React.ReactNode }) {
           </Link>
         </div>
       )}
-      {children}
+      <AppChrome trialBannerVisible={showBanner}>{children}</AppChrome>
     </>
   );
 }

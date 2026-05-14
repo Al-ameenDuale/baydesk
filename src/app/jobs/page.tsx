@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { UpgradeToProNavLink } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
 
 type JobStatus = "pending" | "in_progress" | "done";
@@ -311,7 +310,6 @@ export default function JobsPage() {
             <h1 className="text-lg font-semibold text-zinc-900">Jobs</h1>
           </div>
           <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <UpgradeToProNavLink />
             <button
               onClick={() => setShowNewJob(true)}
               className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"

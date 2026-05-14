@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { UpgradeToProNavLink, type SubscriptionNavFields } from "@/components/UpgradeToProNavLink";
 import { supabase } from "@/lib/supabase/client";
 import { hasFreeTrialAccess, subscriptionIsActive } from "@/lib/trial";
 
@@ -49,11 +48,6 @@ function toEndOfDayISO(dateStr: string) {
 
 export default function DashboardPage() {
   const [checking, setChecking] = useState(true);
-  const [email, setEmail] = useState<string | null>(null);
-  const [navSubscription, setNavSubscription] = useState<SubscriptionNavFields>({
-    is_subscriber: null,
-    subscription_status: null,
-  });
 
   const [loadingSummary, setLoadingSummary] = useState(false);
   const [summaryError, setSummaryError] = useState<string | null>(null);
@@ -85,21 +79,11 @@ export default function DashboardPage() {
         return;
       }
 
-      const { data: profile, error: profileErr } = await supabase
+      const { data: profile } = await supabase
         .from("profiles")
-        .select("is_subscriber, subscription_status, created_at")
+        .select("subscription_status, created_at")
         .eq("id", session.user.id)
         .single();
-
-      const subscriptionSnapshot: SubscriptionNavFields =
-        !profileErr && profile
-          ? {
-              is_subscriber: profile.is_subscriber ?? null,
-              subscription_status: profile.subscription_status ?? null,
-            }
-          : { is_subscriber: null, subscription_status: null };
-
-      setNavSubscription(subscriptionSnapshot);
 
       const status = profile?.subscription_status ?? null;
       const createdAt =
@@ -111,7 +95,6 @@ export default function DashboardPage() {
         return;
       }
 
-      setEmail(session.user.email ?? null);
       setChecking(false);
     }
 
@@ -271,11 +254,6 @@ export default function DashboardPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checking]);
 
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    window.location.replace("/login");
-  }
-
   if (checking) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-zinc-50">
@@ -287,40 +265,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen min-w-0 bg-zinc-50">
       <header className="border-b border-zinc-200 bg-white px-4 py-4 sm:px-6">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto w-full max-w-6xl">
           <h1 className="min-w-0 text-lg font-semibold text-zinc-900">BayDesk Dashboard</h1>
-          <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <a
-              href="/jobs"
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-            >
-              Jobs
-            </a>
-            <a
-              href="/customers"
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-            >
-              Customers
-            </a>
-            <a
-              href="/invoices"
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-            >
-              Invoices
-            </a>
-            <UpgradeToProNavLink profile={navSubscription} />
-            {email && (
-              <span className="max-w-full truncate text-sm text-zinc-600 sm:max-w-[14rem]">
-                Signed in as {email}
-              </span>
-            )}
-            <button
-              onClick={handleLogout}
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-medium text-zinc-800 hover:bg-zinc-100"
-            >
-              Log out
-            </button>
-          </div>
         </div>
       </header>
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 md:py-8">
