@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { hasFreeTrialAccess, subscriptionIsActive } from "@/lib/trial";
@@ -46,6 +47,31 @@ function toEndOfDayISO(dateStr: string) {
   return new Date(`${dateStr}T23:59:59.999`).toISOString();
 }
 
+function JobsIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+      <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+    </svg>
+  );
+}
+
+function CustomersIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+    </svg>
+  );
+}
+
+function InvoicesIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
+      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+    </svg>
+  );
+}
+
 export default function DashboardPage() {
   const [checking, setChecking] = useState(true);
 
@@ -54,7 +80,10 @@ export default function DashboardPage() {
   const [totalRevenueCents, setTotalRevenueCents] = useState(0);
   const [outstandingCents, setOutstandingCents] = useState(0);
   const [jobsThisMonth, setJobsThisMonth] = useState(0);
+  const [activeJobsCount, setActiveJobsCount] = useState(0);
+  const [totalJobsCount, setTotalJobsCount] = useState(0);
   const [totalCustomers, setTotalCustomers] = useState(0);
+  const [unpaidInvoicesCount, setUnpaidInvoicesCount] = useState(0);
 
   const today = new Date();
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -117,15 +146,20 @@ export default function DashboardPage() {
 
     let paid = 0;
     let unpaid = 0;
+    let unpaidInvoiceRows = 0;
     for (const row of (invoices ?? []) as Array<{
       status: InvoiceStatus;
       total_amount_cents: number;
     }>) {
       if (row.status === "paid") paid += row.total_amount_cents;
-      else unpaid += row.total_amount_cents;
+      else {
+        unpaid += row.total_amount_cents;
+        unpaidInvoiceRows += 1;
+      }
     }
     setTotalRevenueCents(paid);
     setOutstandingCents(unpaid);
+    setUnpaidInvoicesCount(unpaidInvoiceRows);
 
     const monthStartIso = new Date(
       today.getFullYear(),
@@ -137,17 +171,30 @@ export default function DashboardPage() {
       0
     ).toISOString();
 
-    const { data: jobs, error: jobsErr } = await supabase
+    const { data: allJobs, error: jobsErr } = await supabase
       .from("jobs")
-      .select("id, created_at")
-      .gte("created_at", monthStartIso);
+      .select("id, created_at, status");
 
     if (jobsErr) {
       setLoadingSummary(false);
       setSummaryError(jobsErr.message);
       return;
     }
-    setJobsThisMonth((jobs ?? []).length);
+
+    const jobRows = (allJobs ?? []) as Array<{
+      id: string;
+      created_at: string;
+      status: string;
+    }>;
+    let thisMonth = 0;
+    let active = 0;
+    for (const j of jobRows) {
+      if (j.created_at >= monthStartIso) thisMonth += 1;
+      if (j.status === "pending" || j.status === "in_progress") active += 1;
+    }
+    setJobsThisMonth(thisMonth);
+    setActiveJobsCount(active);
+    setTotalJobsCount(jobRows.length);
 
     const { data: custs, error: custErr } = await supabase
       .from("customers")
@@ -275,6 +322,94 @@ export default function DashboardPage() {
             {summaryError}
           </section>
         )}
+
+        <section className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm sm:p-6">
+          <h2 className="text-base font-semibold text-zinc-900">Welcome back</h2>
+          <p className="mt-1 max-w-2xl text-sm text-zinc-600">
+            Jump into your day—open jobs, customers, or invoices from here or from the app menu.
+          </p>
+        </section>
+
+        <section aria-label="Quick navigation">
+          <h3 className="sr-only">Quick access</h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <Link
+              href="/jobs"
+              className="group flex min-h-[5.75rem] flex-col rounded-lg border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-[#1B2A4A]/35 hover:shadow-md focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2 sm:min-h-0 sm:flex-row sm:items-stretch sm:gap-4"
+            >
+              <div className="mb-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1B2A4A]/10 text-[#1B2A4A] sm:mb-0">
+                <JobsIcon className="h-6 w-6" />
+              </div>
+              <div className="flex min-w-0 flex-1 flex-col justify-center">
+                <span className="text-sm font-semibold text-zinc-900 group-hover:text-[#1B2A4A]">
+                  View Jobs
+                </span>
+                <p className="mt-1 text-sm text-zinc-600">
+                  {loadingSummary ? (
+                    <span className="text-zinc-400">Loading counts…</span>
+                  ) : (
+                    <>
+                      <span className="font-medium text-zinc-800">
+                        {activeJobsCount === 1 ? "1 active job" : `${activeJobsCount} active jobs`}
+                      </span>
+                      {totalJobsCount > 0 && totalJobsCount !== activeJobsCount && (
+                        <span className="text-zinc-500"> · {totalJobsCount} total</span>
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/customers"
+              className="group flex min-h-[5.75rem] flex-col rounded-lg border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-[#1B2A4A]/35 hover:shadow-md focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2 sm:min-h-0 sm:flex-row sm:items-stretch sm:gap-4"
+            >
+              <div className="mb-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1B2A4A]/10 text-[#1B2A4A] sm:mb-0">
+                <CustomersIcon className="h-6 w-6" />
+              </div>
+              <div className="flex min-w-0 flex-1 flex-col justify-center">
+                <span className="text-sm font-semibold text-zinc-900 group-hover:text-[#1B2A4A]">
+                  View Customers
+                </span>
+                <p className="mt-1 text-sm text-zinc-600">
+                  {loadingSummary ? (
+                    <span className="text-zinc-400">Loading counts…</span>
+                  ) : (
+                    <span className="font-medium text-zinc-800">
+                      {totalCustomers === 1 ? "1 customer" : `${totalCustomers} customers`}
+                    </span>
+                  )}
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/invoices"
+              className="group flex min-h-[5.75rem] flex-col rounded-lg border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-[#1B2A4A]/35 hover:shadow-md focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2 sm:min-h-0 sm:flex-row sm:items-stretch sm:gap-4"
+            >
+              <div className="mb-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1B2A4A]/10 text-[#1B2A4A] sm:mb-0">
+                <InvoicesIcon className="h-6 w-6" />
+              </div>
+              <div className="flex min-w-0 flex-1 flex-col justify-center">
+                <span className="text-sm font-semibold text-zinc-900 group-hover:text-[#1B2A4A]">
+                  View Invoices
+                </span>
+                <p className="mt-1 text-sm text-zinc-600">
+                  {loadingSummary ? (
+                    <span className="text-zinc-400">Loading counts…</span>
+                  ) : (
+                    <span className="font-medium text-zinc-800">
+                      {unpaidInvoicesCount === 1
+                        ? "1 unpaid invoice"
+                        : `${unpaidInvoicesCount} unpaid invoices`}
+                    </span>
+                  )}
+                </p>
+              </div>
+            </Link>
+          </div>
+        </section>
 
         <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
